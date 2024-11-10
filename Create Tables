@@ -19,7 +19,8 @@ CREATE TABLE IF NOT EXISTS RawMaterials(
 CREATE TABLE IF NOT EXISTS Products(
     ProductId INTEGER PRIMARY KEY AUTOINCREMENT,
     Name TEXT NOT NULL,
-    Category TEXT NOT NULL,
+    CategoryId INTEGER NOT NULL,
+    FOREIGN KEY(CategoryId) REFERENCES ProductCategories(ProductId)
 );
 
 CREATE TABLE IF NOT EXISTS Recipes(
@@ -32,7 +33,21 @@ CREATE TABLE IF NOT EXISTS RecipeIngredients(
     RecipeIngredientId INTEGER PRIMARY KEY AUTOINCREMENT,
     RecipeId INTEGER NOT NULL,
     MaterialId INTEGER NOT NULL,
-    Quantity,
+    Quantity TEXT NOT NULL,
     FOREIGN KEY(RecipeId) REFERENCES Recipes(RecipeId),
     FOREIGN KEY(MaterialId) REFERENCES RawMaterials(MaterialId)
 );
+
+CREATE TABLE IF NOT EXISTS Inventory(
+    InventoryId INTEGER PRIMARY KEY AUTOINCREMENT,
+    MaterialId INTEGER NOT NULL,
+    QuantityInStock,
+    LastOrderDate TEXT NOT NULL,
+    FOREIGN KEY(MaterialId) REFERENCES RawMaterials(MaterialId)
+);
+
+CREATE TABLE IF NOT EXISTS ProductCategories(
+    CategoryId INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL
+);
+ 
