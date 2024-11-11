@@ -1,0 +1,11 @@
+DELETE FROM ProductCategories;
+
+
+INSERT INTO ProductCategories 
+(
+    Name
+)
+VALUES
+('Bullor'),
+('Bröd'),
+('Konditorivaror');

@@ -1,0 +1,11 @@
+DELETE FROM Products;
+
+INSERT INTO Products
+(
+    Name,
+    CategoryId
+)
+VALUES
+('Kanelbullar', 1),
+('Levainbröd', 2),
+('Prinsesstårta', 3);
