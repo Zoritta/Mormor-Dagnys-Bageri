@@ -11,43 +11,45 @@ CREATE TABLE IF NOT EXISTS RawMaterials(
     MaterialId INTEGER PRIMARY KEY AUTOINCREMENT,
     ItemNumber TEXT NOT NULL,
     Name TEXT NOT NULL,
-    PricePerKg float NOT NULL,
+    PricePerKg FLOAT NOT NULL,
     SupplierId INTEGER NOT NULL,
-    FOREIGN KEY(SupplierId) REFERENCES Suppliers(SupplierId)
-);
-
-CREATE TABLE IF NOT EXISTS Products(
-    ProductId INTEGER PRIMARY KEY AUTOINCREMENT,
-    Name TEXT NOT NULL,
-    CategoryId INTEGER NOT NULL,
-    FOREIGN KEY(CategoryId) REFERENCES ProductCategories(ProductId)
-);
-
-CREATE TABLE IF NOT EXISTS Recipes(
-    RecipeId INTEGER PRIMARY KEY AUTOINCREMENT,
-    ProductId INTEGER NOT NULL,
-    FOREIGN KEY(ProductId) REFERENCES Products(ProductId)
-);
-
-CREATE TABLE IF NOT EXISTS RecipeIngredients(
-    RecipeIngredientId INTEGER PRIMARY KEY AUTOINCREMENT,
-    RecipeId INTEGER NOT NULL,
-    MaterialId INTEGER NOT NULL,
-    Quantity TEXT NOT NULL,
-    FOREIGN KEY(RecipeId) REFERENCES Recipes(RecipeId),
-    FOREIGN KEY(MaterialId) REFERENCES RawMaterials(MaterialId)
-);
-
-CREATE TABLE IF NOT EXISTS Inventory(
-    InventoryId INTEGER PRIMARY KEY AUTOINCREMENT,
-    MaterialId INTEGER NOT NULL,
-    QuantityInStock,
-    LastOrderDate TEXT NOT NULL,
-    FOREIGN KEY(MaterialId) REFERENCES RawMaterials(MaterialId)
+    FOREIGN KEY(SupplierId) REFERENCES Suppliers(SupplierId) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS ProductCategories(
     CategoryId INTEGER PRIMARY KEY AUTOINCREMENT,
     Name TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS Products(
+    ProductId INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL,
+    CategoryId INTEGER NOT NULL,
+    FOREIGN KEY(CategoryId) REFERENCES ProductCategories(CategoryId)
+);
+
+CREATE TABLE IF NOT EXISTS Recipes(
+    RecipeId INTEGER PRIMARY KEY AUTOINCREMENT,
+    ProductId INTEGER NOT NULL,
+    FOREIGN KEY(ProductId) REFERENCES Products(ProductId) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS RecipeIngredients(
+    RecipeIngredientId INTEGER PRIMARY KEY AUTOINCREMENT,
+    RecipeId INTEGER NOT NULL,
+    MaterialId INTEGER NOT NULL,
+    Quantity FLOAT NOT NULL CHECK(Quantity >= 0),
+    FOREIGN KEY(RecipeId) REFERENCES Recipes(RecipeId) ON DELETE CASCADE,
+    FOREIGN KEY(MaterialId) REFERENCES RawMaterials(MaterialId) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Inventory(
+    InventoryId INTEGER PRIMARY KEY AUTOINCREMENT,
+    MaterialId INTEGER NOT NULL,
+    QuantityInStock FLOAT NOT NULL CHECK(QuantityInStock >= 0),
+    LastOrderDate TEXT NOT NULL,
+    FOREIGN KEY(MaterialId) REFERENCES RawMaterials(MaterialId) ON DELETE CASCADE
+);
+
+
  
