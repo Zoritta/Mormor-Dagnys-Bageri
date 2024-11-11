@@ -1,0 +1,8 @@
+INSERT INTO Recipes 
+(
+    ProductId
+) 
+VALUES
+(1),  -- Kanelbullar
+(2),  -- Levainbröd
+(3);  -- Prinsesstårta

@@ -1,0 +1,55 @@
+--Listing all products with their associated raw materials
+
+SELECT 
+    p.Name AS Product,
+    pc.Name AS Category,
+    rm.Name AS RawMaterial,
+    ri.Quantity AS QuantityNeeded,
+    s.Name AS Supplier
+FROM 
+    Products p
+JOIN 
+    ProductCategories pc ON p.CategoryId = pc.CategoryId
+JOIN 
+    Recipes r ON p.ProductId = r.ProductId
+JOIN 
+    RecipeIngredients ri ON r.RecipeId = ri.RecipeId
+JOIN 
+    RawMaterials rm ON ri.MaterialId = rm.MaterialId
+JOIN 
+    Suppliers s ON rm.SupplierId = s.SupplierId
+ORDER BY 
+    p.Name;
+
+
+--Listing all suppliers with the raw materials they provide
+
+SELECT 
+    s.Name AS Supplier,
+    rm.Name AS RawMaterial,
+    rm.PricePerKg AS PricePerKg
+FROM 
+    Suppliers s
+JOIN 
+    RawMaterials rm ON s.SupplierId = rm.SupplierId
+ORDER BY 
+    s.Name;
+
+
+--Showing inventory levels, including any items below a restocking
+
+SELECT 
+    rm.Name AS RawMaterial,
+    i.QuantityInStock AS StockLevel,
+    CASE 
+        WHEN i.QuantityInStock < 200 THEN 'Restock Needed'
+        ELSE 'Stock Sufficient'
+    END AS RestockStatus
+FROM 
+    Inventory i
+JOIN 
+    RawMaterials rm ON i.MaterialId = rm.MaterialId
+ORDER BY 
+    i.QuantityInStock;
+
+

@@ -1,0 +1,12 @@
+INSERT INTO Inventory
+(
+    MaterialId,
+    QuantityInStock,
+    LastOrderDate
+)
+VALUES
+(1, 2000, '2024-11-01'),  -- 2000g Vetemjöl in stock
+(2, 500, '2024-11-02'),   -- 500g Socker in stock
+(3, 300, '2024-11-03'),   -- 300g Smör in stock
+(4, 150, '2024-11-04'),   -- 150g Jäst in stock
+(5, 100, '2024-11-05');   -- 100g Salt in stock
