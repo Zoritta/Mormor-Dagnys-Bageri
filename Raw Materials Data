@@ -1,0 +1,11 @@
+INSERT INTO RawMaterials (
+    ItemNumber,
+    Name,
+    PricePerKg,
+    SupplierId) 
+VALUES
+('R001', 'Vetemjöl', 12.50, 1),
+('R002', 'Socker', 15.00, 2),
+('R003', 'Smör', 45.00, 3),
+('R004', 'Jäst', 10.00, 1),
+('R005', 'Salt', 5.00, 1);

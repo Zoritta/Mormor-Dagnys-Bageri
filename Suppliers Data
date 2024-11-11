@@ -1,0 +1,10 @@
+INSERT INTO Suppliers (
+    Name,
+    Address,
+    ContactPerson,
+    Phone,
+    Email) 
+VALUES
+('Svenska Mjöl AB', 'Kungsgatan 10, Stockholm', 'Anna Svensson', '08-1234567', 'kontakt@svenskamjol.se'),
+('Ekologisk Sockerfabrik', 'Lilla Torget 5, Göteborg', 'Per Lindgren', '031-7654321', 'info@sockerfabrik.se'),
+('Smör & Honung', 'Storgatan 22, Malmö', 'Lena Karlsson', '040-987654', 'lena@smorhonung.se');
